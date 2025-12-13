@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h2>Admin Dashboard</h2>
+
+<p>Hoş geldin, admin!</p>
+
+<ul>
+    <li>Toplam kullanıcı sayısı: <span th:text="${userCount}">0</span></li>
+    <li>Toplam proje sayısı: <span th:text="${projectCount}">0</span></li>
+    <li>Toplam task sayısı: <span th:text="${taskCount}">0</span></li>
+</ul>
+
+<p>
+    <a href="/logout">Logout</a>
+</p>
+
+</body>
+</html>

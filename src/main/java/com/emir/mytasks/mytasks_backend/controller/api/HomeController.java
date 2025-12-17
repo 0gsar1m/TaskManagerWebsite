@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        // Siteye giren herkesi direkt login paneline yönlendir
-        return "redirect:/login";
+        //irekt admin girişine yolla
+        return "redirect:/admin/login";
     }
 }

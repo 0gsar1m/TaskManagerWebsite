@@ -42,8 +42,17 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // 1) Statik dosyalar ve API Auth serbest
                         .requestMatchers("/api/auth/**", "/css/**", "/js/**", "/images/**").permitAll()
+
+                        // 2) KRİTİK EKLEME: Admin Login sayfasına herkes erişebilsin!
+                        // Bunu "/admin/**" kuralından ÖNCE yazmalısın.
+                        .requestMatchers("/admin/login").permitAll()
+
+                        // 3) Geri kalan /admin rotaları sadece ADMIN rolüne açık
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // 4) Diğer her şey için giriş yapılmış olmalı
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

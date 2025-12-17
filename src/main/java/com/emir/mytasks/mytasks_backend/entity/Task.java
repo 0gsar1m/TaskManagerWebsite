@@ -2,12 +2,18 @@ package com.emir.mytasks.mytasks_backend.entity;
 
 import com.emir.mytasks.mytasks_backend.model.TaskPriority;
 import com.emir.mytasks.mytasks_backend.model.TaskStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -18,6 +24,7 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
+    @JsonIgnore
     private Project project;
 
     @Column(nullable = false, length = 150)
@@ -54,5 +61,5 @@ public class Task {
     public Task() {
     }
 
-    // getters/setters
+
 }

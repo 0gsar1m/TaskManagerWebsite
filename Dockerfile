@@ -1,4 +1,16 @@
-FROM ubuntu:latest
-LABEL authors="ogsar"
+# 1) Building with Maven
+FROM maven:3.8.5-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-ENTRYPOINT ["top", "-b"]
+# 2) Running the application
+FROM eclipse-temurin:17-jdk-jammy
+WORKDIR /app
+
+# JAR ismini dinamik aliyoruz ki versiyon degisince patlamasin
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
